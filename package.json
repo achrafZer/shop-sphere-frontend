@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "generate-api": "rm -rf openapi-generator-cli.jar && curl --insecure https://repo.maven.apache.org/maven2/org/openapitools/openapi-generator-cli/6.6.0/openapi-generator-cli-6.6.0.jar -o openapi-generator-cli.jar && java -jar openapi-generator-cli.jar generate -i ../backend/src/main/java/com/shop/sphere/api/shop-sphere.yaml -g typescript-angular -o ./src/api --additional-properties=stringEnums=true,ngVersion=16.2.11",
+    "generate-api": "rm -rf openapi-generator-cli.jar && curl --insecure https://repo.maven.apache.org/maven2/org/openapitools/openapi-generator-cli/6.6.0/openapi-generator-cli-6.6.0.jar -o openapi-generator-cli.jar && java -jar openapi-generator-cli.jar generate -i ../backend/src/main/java/com/shop/sphere/api/shop-sphere.yaml -g typescript-angular -o ./src/api-client --additional-properties=stringEnums=true,ngVersion=16.2.11",
     "start": "npm run generate-api && ng serve --port ",
     "build": "npm run generate-api && ng build",
     "watch": "ng build --watch --configuration development",
