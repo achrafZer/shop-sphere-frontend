@@ -21,7 +21,7 @@ export class ProductService {
    * Retrieve all products from the database
    * @returns an observable of products
    */
-  public getProducts(): Observable<Array<ProductDTO>> {
+  public getProducts(): Observable<ProductDTO[]> {
     return this.productsApiService.getProducts();
   }
 
