@@ -1,12 +1,16 @@
-<p [ngIf]="errorMessage" [ngIfElse]="ShowProducts">
-  {{ errorMessage }}
-</p>
-<<ng-template #ShowProducts>
+<ng-container *ngIf="errorMessage; else ShowProducts">
+  <p>
+    {{ errorMessage }}
+  </p>
+</ng-container>
+<ng-template #ShowProducts>
   <div *ngFor="let product of productsList">
-    <p>{{ product.id }}</p>
-    <p>{{ product.title }}</p>
-    <p>{{ product.price }}</p>
-    <p>{{ product.quantity }}</p>
-    <p>{{ product.photo }}</p>
+    <p>
+      <strong>id</strong>: {{ product.id }}<br />
+      <strong>Title</strong>: {{ product.title }}<br />
+      <strong>Price</strong>: {{ product.price }}<br />
+      <strong>Quantity</strong>: {{ product.quantity }}<br />
+      <strong>Photo</strong>: {{ product.photo }}<br />
+    </p>
   </div>
 </ng-template>
