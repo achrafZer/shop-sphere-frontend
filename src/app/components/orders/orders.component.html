@@ -1,1 +1,29 @@
-<p>orders works!</p>
+<ng-container *ngIf="errorMessage; else showOrders">
+  <p>
+    {{ errorMessage }}
+  </p>
+</ng-container>
+<ng-template #showOrders>
+  <div *ngFor="let order of ordersList">
+    <strong>order id</strong>: {{ order.id }}<br />
+    <strong>articles</strong>:
+    <ul *ngFor="let article of order.articles">
+      <li><a [routerLink]="['/products', article.id]">detail</a></li>
+      <li><strong>Title</strong>: {{ article.title }}<br /></li>
+      <li><strong>Price</strong>: {{ article.price }}<br /></li>
+      <li><strong>Quantity</strong>: {{ article.quantity }}<br /></li>
+      <li><strong>Photo</strong>: {{ article.photo }}<br /></li>
+    </ul>
+    <strong>IsFinalized</strong>: {{ order.isFinalized }}<br />
+    <strong>Date</strong>: {{ order.date }}<br />
+    <strong>Client</strong>:
+    <ul>
+      <li><strong>Id</strong>: {{ order.client.id }}<br /></li>
+      <li><strong>FirstName</strong>: {{ order.client.firstName }}<br /></li>
+      <li><strong>LastName</strong>: {{ order.client.lastName }}<br /></li>
+      <li><strong>Email</strong>: {{ order.client.email }}<br /></li>
+      <li><strong>Password</strong>: {{ order.client.password }}<br /></li>
+      <li><strong>Address</strong>: {{ order.client.address }}<br /></li>
+    </ul>
+  </div>
+</ng-template>
