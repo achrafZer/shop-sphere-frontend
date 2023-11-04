@@ -1,1 +1,12 @@
-<p>products works!</p>
+<p [ngIf]="errorMessage" [ngIfElse]="ShowProducts">
+  {{ errorMessage }}
+</p>
+<<ng-template #ShowProducts>
+  <div *ngFor="let product of productsList">
+    <p>{{ product.id }}</p>
+    <p>{{ product.title }}</p>
+    <p>{{ product.price }}</p>
+    <p>{{ product.quantity }}</p>
+    <p>{{ product.photo }}</p>
+  </div>
+</ng-template>
