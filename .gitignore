@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Api
+/src/api-client
+openapi-generator-cli.jar
+
 # Compiled output
 /dist
 /tmp
