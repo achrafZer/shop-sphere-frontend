@@ -17,7 +17,7 @@ export class ProductsComponent implements OnInit {
     this.initProductsList();
   }
 
-  /* Init the products list by fetching products from the databse */
+  /* Init the products list by fetching products from the database */
   private initProductsList(): void {
     this.productsService.getProducts().subscribe({
       next: (data: ProductDTO[]) => {

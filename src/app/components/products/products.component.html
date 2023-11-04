@@ -1,9 +1,9 @@
-<ng-container *ngIf="errorMessage; else ShowProducts">
+<ng-container *ngIf="errorMessage; else showProducts">
   <p>
     {{ errorMessage }}
   </p>
 </ng-container>
-<ng-template #ShowProducts>
+<ng-template #showProducts>
   <div *ngFor="let product of productsList">
     <p>
       <strong>id</strong>: {{ product.id }}<br />
