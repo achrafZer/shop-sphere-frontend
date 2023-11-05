@@ -1,1 +1,16 @@
-<p>product works!</p>
+<ng-container *ngIf="errorMessage; else showProduct">
+  <p>
+    {{ errorMessage }}
+  </p>
+</ng-container>
+<ng-template #showProduct>
+  <div class="product">
+    <h2>{{ product.title }}</h2>
+    <p>ID : {{ product.id }}</p>
+    <p>Prix : {{ product.price | currency : "USD" : "symbol" : "1.2-2" }}</p>
+    <p>Quantité : {{ product.quantity }}</p>
+    <p>Description : {{ product.description }}</p>
+
+    <button (click)="onGoBackButtonClick()">Retour</button>
+  </div>
+</ng-template>
