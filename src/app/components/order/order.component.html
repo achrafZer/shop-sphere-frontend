@@ -1,1 +1,27 @@
-<p>order works!</p>
+<ng-container *ngIf="errorMessage; else showOrder">
+  <p>
+    {{ errorMessage }}
+  </p>
+</ng-container>
+<ng-template #showOrder>
+  <div class="order">
+    <h2>Commande #{{ order.id }}</h2>
+    <p>Date de la commande : {{ order.date }}</p>
+    <p>Statut : {{ order.isFinalized ? "Finalisée" : "En cours" }}</p>
+
+    <h3>Articles de la commande :</h3>
+    <ul>
+      <li *ngFor="let article of order.articles">
+        {{ article.title }} (Quantité : {{ article.quantity }})
+      </li>
+    </ul>
+
+    <h3>Client :</h3>
+    <p>
+      Nom du client : {{ order.client.firstName }} {{ order.client.lastName }}
+    </p>
+    <p>Email du client : {{ order.client.email }}</p>
+
+    <button (click)="onGoBackButtonClick()">Retour</button>
+  </div>
+</ng-template>
