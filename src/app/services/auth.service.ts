@@ -6,14 +6,11 @@ import { LoginDTO, LoginService, UserConnectedDTO } from 'src/api-client';
   providedIn: 'root',
 })
 export class AuthService {
-  private isAuthenticated: boolean = false;
-
   constructor(private loginService: LoginService, private router: Router) {}
 
   public login(email: string, password: string): void {
     this.loginService.login({ email, password } as LoginDTO).subscribe({
       next: (data: UserConnectedDTO) => {
-        this.isAuthenticated = true;
         localStorage.setItem('auth-data', JSON.stringify(data));
         this.navigateToHome();
       },
@@ -22,13 +19,12 @@ export class AuthService {
   }
 
   public logout(): void {
-    this.isAuthenticated = false;
     localStorage.removeItem('auth-data');
     this.navigateToHome();
   }
 
   public isAuthenticatedUser(): boolean {
-    return this.isAuthenticated;
+    return !!localStorage.getItem('auth-data');
   }
 
   private navigateToHome(): void {
