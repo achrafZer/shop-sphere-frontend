@@ -21,12 +21,10 @@ export class LoginFormComponent {
     });
   }
 
-  onSubmit() {
+  public onSubmit(): void {
     if (this.loginForm.valid) {
       const formData = this.loginForm.value as LoginDTO;
       this.authService.login(formData.email, formData.password);
-      console.log('Données du formulaire soumises :', formData);
-      console.log(localStorage.getItem('auth-data'));
     }
   }
 }
