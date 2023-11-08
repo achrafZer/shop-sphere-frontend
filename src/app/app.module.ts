@@ -16,6 +16,7 @@ import { OrderComponent } from './components/order/order.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductsComponent } from './components/products/products.component';
+import { PaymentFormComponent } from './components/forms/payment-form/payment-form.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ProductsComponent } from './components/products/products.component';
     ProductComponent,
     ProductsComponent,
     BuyerUpdateFormComponent,
+    PaymentFormComponent,
   ],
   imports: [
     BrowserModule,
