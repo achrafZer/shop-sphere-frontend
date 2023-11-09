@@ -1,0 +1,15 @@
+<div *ngFor="let article of articles">
+  <p>
+    <strong>id</strong>: {{ article.product.id }}<br />
+    <strong>Title</strong>: {{ article.product.title }}<br />
+    <strong>Price</strong>: {{ article.product.price }}<br />
+    <strong>Quantity</strong>: {{ article.product.quantity }}<br />
+    <strong>Photo</strong>: {{ article.product.photo }}<br />
+    <strong>Qte</strong>: {{ article.qte }}<br />
+
+    <button (click)="increment(article.product)">+</button>
+    <button (click)="decrement(article.product)">-</button>
+  </p>
+
+  <button (click)="validate()">validate</button>
+</div>

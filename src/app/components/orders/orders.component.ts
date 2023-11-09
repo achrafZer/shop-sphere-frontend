@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrderDTO } from 'src/api-client';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -11,7 +12,10 @@ export class OrdersComponent implements OnInit {
   ordersList!: OrderDTO[];
   errorMessage!: string;
 
-  constructor(private ordersService: OrderService) {}
+  constructor(
+    private ordersService: OrderService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.initOrdersList();
@@ -25,7 +29,14 @@ export class OrdersComponent implements OnInit {
       },
       error: () => {
         this.errorMessage = 'Could not fetch orders from database';
+        this.openSnackBar('Could not fetch orders from database');
       },
+    });
+  }
+
+  private openSnackBar(message: string): void {
+    this.snackBar.open(message, 'close', {
+      duration: 3000,
     });
   }
 }

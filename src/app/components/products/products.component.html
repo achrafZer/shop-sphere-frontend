@@ -11,6 +11,7 @@
       <strong>Price</strong>: {{ product.price }}<br />
       <strong>Quantity</strong>: {{ product.quantity }}<br />
       <strong>Photo</strong>: {{ product.photo }}<br />
+      <button (click)="addToCart(product)">Add to Cart</button>
     </p>
   </div>
 </ng-template>

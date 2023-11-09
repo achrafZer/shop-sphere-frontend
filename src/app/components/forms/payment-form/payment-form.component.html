@@ -1,5 +1,5 @@
 <div class="payment-form">
-  <h1>Payment</h1>
+  <h1>Payment of {{ amount }} euros</h1>
   <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="cardHolder">Card Holder Name</label>
@@ -47,6 +47,6 @@
       />
     </div>
 
-    <button type="submit" [disabled]="!paymentForm.valid">submit</button>
+    <button type="submit" [disabled]="!paymentForm.valid">Purchase</button>
   </form>
 </div>
