@@ -13,6 +13,5 @@ export class BuyerComponent implements OnInit {
     this.buyer = JSON.parse(
       localStorage.getItem('auth-data') as string
     ) as BuyerDTO;
-    console.log(this.buyer);
   }
 }

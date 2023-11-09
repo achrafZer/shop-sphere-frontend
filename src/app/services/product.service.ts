@@ -29,7 +29,7 @@ export class ProductService {
    * Update a product in the database
    * @param product the product to update
    */
-  public updateProduct(product: ProductDTO): void {
-    this.productsApiService.updateProduct(product);
+  public updateProduct(product: ProductDTO): Observable<any> {
+    return this.productsApiService.updateProduct(product);
   }
 }

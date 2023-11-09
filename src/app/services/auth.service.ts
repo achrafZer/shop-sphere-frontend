@@ -12,6 +12,7 @@ export class AuthService {
     this.loginService.login({ email, password } as LoginDTO).subscribe({
       next: (data: UserConnectedDTO) => {
         localStorage.setItem('auth-data', JSON.stringify(data));
+        localStorage.setItem('auth-cart', JSON.stringify([]));
         this.navigateToHome();
       },
       error: (error) => console.log(error),
@@ -19,7 +20,7 @@ export class AuthService {
   }
 
   public logout(): void {
-    localStorage.removeItem('auth-data');
+    localStorage.clear();
     this.navigateToHome();
   }
 

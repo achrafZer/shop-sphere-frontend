@@ -1,0 +1,52 @@
+<div class="payment-form">
+  <h1>Payment of {{ amount }} euros</h1>
+  <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="cardHolder">Card Holder Name</label>
+      <input
+        type="text"
+        id="cardHolder"
+        name="cardHolder"
+        formControlName="cardHolder"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="cardNumber">Card Number</label>
+      <input
+        type="text"
+        id="cardNumber"
+        name="cardNumber"
+        formControlName="cardNumber"
+        maxlength="10"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="expDate">Expiration date</label>
+      <input
+        type="text"
+        id="expDate"
+        name="expDate"
+        formControlName="expDate"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="code">CVV/CVC</label>
+      <input
+        type="text"
+        id="code"
+        name="code"
+        formControlName="code"
+        maxlength="3"
+        required
+      />
+    </div>
+
+    <button type="submit" [disabled]="!paymentForm.valid">Purchase</button>
+  </form>
+</div>

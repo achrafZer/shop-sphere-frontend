@@ -10,8 +10,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { BuyerComponent } from './components/buyer/buyer.component';
+import { CartComponent } from './components/cart/cart.component';
 import { BuyerUpdateFormComponent } from './components/forms/buyer-update-form/buyer-update-form.component';
 import { LoginFormComponent } from './components/forms/login-form/login-form.component';
+import { PaymentFormComponent } from './components/forms/payment-form/payment-form.component';
 import { OrderComponent } from './components/order/order.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { ProductComponent } from './components/product/product.component';
@@ -28,6 +30,8 @@ import { ProductsComponent } from './components/products/products.component';
     ProductComponent,
     ProductsComponent,
     BuyerUpdateFormComponent,
+    PaymentFormComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

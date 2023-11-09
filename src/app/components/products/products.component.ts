@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductDTO } from 'src/api-client';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -11,7 +13,11 @@ export class ProductsComponent implements OnInit {
   productsList!: ProductDTO[];
   errorMessage!: string;
 
-  constructor(private productsService: ProductService) {}
+  constructor(
+    private productsService: ProductService,
+    private cartService: CartService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.initProductsList();
@@ -24,8 +30,23 @@ export class ProductsComponent implements OnInit {
         this.productsList = [...data];
       },
       error: () => {
-        this.errorMessage = 'Could not fetch products from database';
+        this.errorMessage = 'toto';
+        this.openSnackBar('Could not fetch products from database');
       },
+    });
+  }
+
+  public addToCart(product: ProductDTO) {
+    this.cartService.addProduct(product);
+    const updatedProductsList = this.productsList.map((p) =>
+      p.id === product.id ? { ...p, quantity: p.quantity - 1 } : p
+    );
+    this.productsList = [...updatedProductsList];
+  }
+
+  private openSnackBar(message: string): void {
+    this.snackBar.open(message, 'close', {
+      duration: 3000,
     });
   }
 }
