@@ -18,6 +18,7 @@ import { OrderComponent } from './components/order/order.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductsComponent } from './components/products/products.component';
+import { SignupFormComponent } from './components/forms/signup-form/signup-form.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProductsComponent } from './components/products/products.component';
     BuyerUpdateFormComponent,
     PaymentFormComponent,
     CartComponent,
+    SignupFormComponent,
   ],
   imports: [
     BrowserModule,
