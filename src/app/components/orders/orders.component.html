@@ -1,6 +1,7 @@
-<ng-container *ngIf="errorMessage; else showOrders">
+<ng-container *ngIf="ordersList; else showOrders">
   <p>
-    {{ errorMessage }}
+    You don't have order yet. <br />Please make sure you add articles to your
+    cart and purchase a payment
   </p>
 </ng-container>
 <ng-template #showOrders>

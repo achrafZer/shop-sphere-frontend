@@ -33,17 +33,22 @@ export class PaymentFormComponent implements OnInit {
 
   public onSubmit(): void {
     const date = new Date();
-    const formattedDate = date.toLocaleDateString('en-US');
-    const order: OrderDTO = {
+    const options = {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    } as Intl.DateTimeFormatOptions;
+    const formattedDate = date.toLocaleDateString('fr-FR', options);
+    const order = {
       articles: [
         ...this.cartService.getArticles().map((element) => element.product),
       ],
       date: formattedDate,
       isFinalized: true,
       client: JSON.parse(localStorage.getItem('auth-data')!),
-    };
+    } as OrderDTO;
     this.orderService.createOrder(order).subscribe((data) => console.log(data));
     this.cartService.clearCart();
-    this.router.navigate(['orders']);
+    this.router.navigate(['/orders']);
   }
 }

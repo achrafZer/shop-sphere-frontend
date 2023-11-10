@@ -13,7 +13,7 @@ export class AuthService {
       next: (data: UserConnectedDTO) => {
         localStorage.setItem('auth-data', JSON.stringify(data));
         localStorage.setItem('auth-cart', JSON.stringify([]));
-        this.navigateToHome();
+        this.router.navigate(['/home']).then(() => window.location.reload());
       },
       error: (error) => console.log(error),
     });
@@ -21,14 +21,10 @@ export class AuthService {
 
   public logout(): void {
     localStorage.clear();
-    this.navigateToHome();
+    this.router.navigate(['/home']).then(() => window.location.reload());
   }
 
   public isAuthenticatedUser(): boolean {
     return !!localStorage.getItem('auth-data');
-  }
-
-  private navigateToHome(): void {
-    this.router.navigate(['home']);
   }
 }

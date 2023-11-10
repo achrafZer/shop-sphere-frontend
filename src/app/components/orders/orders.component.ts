@@ -10,7 +10,7 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class OrdersComponent implements OnInit {
   ordersList!: OrderDTO[];
-  errorMessage!: string;
+  error!: string;
 
   constructor(
     private ordersService: OrderService,
@@ -25,10 +25,10 @@ export class OrdersComponent implements OnInit {
   private initOrdersList(): void {
     this.ordersService.getOrders().subscribe({
       next: (data: OrderDTO[]) => {
-        this.ordersList = [...data];
+        this.ordersList = data ? (this.ordersList = [...data]) : [];
       },
-      error: () => {
-        this.errorMessage = 'Could not fetch orders from database';
+      error: (error) => {
+        this.error = error;
         this.openSnackBar('Could not fetch orders from database');
       },
     });

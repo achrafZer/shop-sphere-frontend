@@ -27,8 +27,4 @@ export class LoginFormComponent {
       this.authService.login(formData.email, formData.password);
     }
   }
-
-  logout() {
-    this.authService.logout();
-  }
 }

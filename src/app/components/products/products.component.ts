@@ -39,7 +39,9 @@ export class ProductsComponent implements OnInit {
   public addToCart(product: ProductDTO) {
     this.cartService.addProduct(product);
     const updatedProductsList = this.productsList.map((p) =>
-      p.id === product.id ? { ...p, quantity: p.quantity - 1 } : p
+      p.id === product.id
+        ? { ...p, quantity: p.quantity > 0 ? p.quantity - 1 : p.quantity }
+        : p
     );
     this.productsList = [...updatedProductsList];
   }

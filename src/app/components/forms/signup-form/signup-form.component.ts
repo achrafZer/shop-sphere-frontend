@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BuyerDTO, BuyersService } from 'src/api-client';
+import { BuyerDTO } from 'src/api-client';
+import { BuyerService } from 'src/app/services/buyer.service';
 
 @Component({
   selector: 'app-signup-form',
@@ -13,7 +14,7 @@ export class SignupFormComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private buyerService: BuyersService,
+    private buyerService: BuyerService,
     private router: Router
   ) {
     this.signupFrom = this.formBuilder.group({
@@ -27,8 +28,13 @@ export class SignupFormComponent {
 
   public onSubmit() {
     if (this.signupFrom.valid) {
-      this.buyerService.createBuyer(this.signupFrom.value as BuyerDTO);
-      this.router.navigate(['login']);
+      this.buyerService
+        .createBuyer(this.signupFrom.value as BuyerDTO)
+        .subscribe(
+          (next) => console.log(next),
+          (error) => console.log(error)
+        );
+      this.router.navigate(['/login']);
     }
   }
 }
