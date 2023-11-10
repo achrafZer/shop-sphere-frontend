@@ -4,42 +4,67 @@
   </p>
 </ng-container>
 <ng-template #showProducts>
-
   <section>
     <div class="row">
-      <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let product of productsList; let i = index">
+      <div
+        class="col-md-4 col-sm-6 col-xs-12"
+        *ngFor="let product of productsList; let i = index"
+      >
         <div class="card" *ngIf="i % 3 === 0">
-          <div class="cover item-a" style="background-image: url('{{ product.photo }}');">
+          <div
+            class="cover item-a"
+            style="background-image: url('{{ product.photo }}');"
+          >
             <h1>{{ product.title }}</h1>
             <span class="price">${{ product.price }}</span>
             <div class="card-back">
-              <a (click)="addToCart(product)">Add to cart</a>
-              <a href="#">View detail</a>
+              <a
+                *ngIf="isUserConnected()"
+                [routerLink]="[]"
+                (click)="addToCart(product)"
+                >Add to cart</a
+              >
+              <a [routerLink]="['/products', i]">View detail</a>
             </div>
           </div>
         </div>
         <div class="card" *ngIf="i % 3 === 1">
-          <div class="cover item-b" style="background-image: url('{{ product.photo }}');">
+          <div
+            class="cover item-b"
+            style="background-image: url('{{ product.photo }}');"
+          >
             <h1>{{ product.title }}</h1>
             <span class="price">${{ product.price }}</span>
             <div class="card-back">
-              <a (click)="addToCart(product)">Add to cart</a>
-              <a href="#">View detail</a>
+              <a
+                *ngIf="isUserConnected()"
+                [routerLink]="[]"
+                (click)="addToCart(product)"
+                >Add to cart</a
+              >
+              <a [routerLink]="['/products', i]">View detail</a>
             </div>
           </div>
         </div>
         <div class="card" *ngIf="i % 3 === 2">
-          <div class="cover item-c" style="background-image: url('{{ product.photo }}');">
+          <div
+            class="cover item-c"
+            style="background-image: url('{{ product.photo }}');"
+          >
             <h1>{{ product.title }}</h1>
             <span class="price">${{ product.price }}</span>
             <div class="card-back">
-              <a (click)="addToCart(product)">Add to cart</a>
-              <a href="#">View detail</a>
+              <a
+                *ngIf="isUserConnected()"
+                [routerLink]="[]"
+                (click)="addToCart(product)"
+                >Add to cart</a
+              >
+              <a [routerLink]="['/products', i]">View detail</a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-
 </ng-template>
