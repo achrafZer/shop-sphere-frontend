@@ -26,6 +26,7 @@ export class CartService {
     } else {
       this.addArticle({ product: { ...product }, qte: 1 } as CartArticle);
     }
+    this.openSnackBar('Product added successfully');
   }
 
   public removeProduct(product: ProductDTO): void {

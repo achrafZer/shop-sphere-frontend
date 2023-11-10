@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductDTO } from 'src/api-client';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -16,7 +17,8 @@ export class ProductsComponent implements OnInit {
   constructor(
     private productsService: ProductService,
     private cartService: CartService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +36,10 @@ export class ProductsComponent implements OnInit {
         this.openSnackBar('Could not fetch products from database');
       },
     });
+  }
+
+  public isUserConnected(): boolean {
+    return this.authService.isAuthenticatedUser();
   }
 
   public addToCart(product: ProductDTO) {
