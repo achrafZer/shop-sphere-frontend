@@ -1,16 +1,19 @@
-<ng-container *ngIf="errorMessage; else showProduct">
-  <p>
-    {{ errorMessage }}
-  </p>
-</ng-container>
-<ng-template #showProduct>
-  <div class="product">
-    <h2>{{ product.title }}</h2>
-    <p>ID : {{ product.id }}</p>
-    <p>Prix : {{ product.price }}</p>
-    <p>Quantité : {{ product.quantity }}</p>
-    <p>Description : {{ product.description }}</p>
-
-    <button (click)="onGoBackButtonClick()">Retour</button>
-  </div>
-</ng-template>
+  <section class="wrap-3d">
+    
+    <div class="item-3d">
+      <span class="ground"></span>
+      <figure class="item-content group">
+        <div class="item-img">
+          <img src="{{ product.photo }}" alt="" />
+        </div>
+        <figcaption class="item-caption">
+          <h1>{{ product.title }}</h1>
+          <br><br>
+          <p> {{ product.description }} </p>
+          <br><br>
+          <h1>$ {{ product.price }}</h1>
+        </figcaption>
+      </figure>
+    </div>
+    
+  </section>
