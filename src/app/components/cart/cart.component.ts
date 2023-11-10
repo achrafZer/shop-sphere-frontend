@@ -11,21 +11,25 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartComponent implements OnInit {
   articles!: CartArticle[];
+  totalPrice!: number;
 
   constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
     this.initArticles();
+    this.totalPrice = this.cartService.getTotalPrice();
   }
 
   public increment(product: ProductDTO): void {
     this.cartService.addProduct(product);
     this.initArticles();
+    this.totalPrice = this.cartService.getTotalPrice();
   }
 
   public decrement(product: ProductDTO): void {
     this.cartService.removeProduct(product);
     this.initArticles();
+    this.totalPrice = this.cartService.getTotalPrice();
   }
 
   public validate(): void {
