@@ -2,33 +2,40 @@
   <div class="header">
     <a href="#default" class="logo">Shop Sphere</a>
     <div class="header-right">
-      <a [routerLink]="['/home']" class="active" >Home</a>
-      <a [routerLink]="['/admin']">Admin</a>
-      <a [routerLink]="['/login']">Log in</a>
-      <a [routerLink]="['/me']">Me</a>
-      <a [routerLink]="['/cart']">My cart</a>
-      <a [routerLink]="['/orders']">My orders</a>
-      <a [routerLink]="['/orders', 0]">An order</a>
-      <a [routerLink]="['/products', 0]">A product</a>
-      <a [routerLink]="['/payment/secure']">Payment</a>
+      <a [routerLink]="['/home']">Home</a>
+      <a [routerLink]="['/cart']" *ngIf="user !== null">My cart</a>
+      <a [routerLink]="['/orders']" *ngIf="user !== null">My orders</a>
+      <a [routerLink]="['/login']" *ngIf="user === null">Log in</a>
+      <a [routerLink]="['/signup']" *ngIf="user === null">Sign up</a>
+      <a [routerLink]="['/me']" *ngIf="user !== null">Me</a>
+      <a [routerLink]="[]" *ngIf="user !== null" (click)="logout()">Log out</a>
     </div>
-  </div> 
+  </div>
 </header>
 
 <router-outlet></router-outlet>
 
 <div class="footer-dark">
   <footer>
-      <div class="container">
-          <div class="row">
-              <div class="col-md-6 item text">
-                  <h3>Shop Sphere</h3>
-                  <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
-              </div>
-              <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
-          </div>
-          <p class="copyright">Shop Sphere © 2018</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 item text">
+          <h3>Shop Sphere</h3>
+          <p>
+            Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus
+            ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique
+            lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.
+          </p>
+        </div>
+        <div class="col item social">
+          <a href="#"><i class="icon ion-social-facebook"></i></a
+          ><a href="#"><i class="icon ion-social-twitter"></i></a
+          ><a href="#"><i class="icon ion-social-snapchat"></i></a
+          ><a href="#"><i class="icon ion-social-instagram"></i></a>
+        </div>
       </div>
+      <p class="copyright">Shop Sphere © 2018</p>
+    </div>
   </footer>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

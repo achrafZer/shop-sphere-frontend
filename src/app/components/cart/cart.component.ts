@@ -29,7 +29,7 @@ export class CartComponent implements OnInit {
   }
 
   public validate(): void {
-    this.router.navigate(['payment/secure']);
+    this.router.navigate(['payment-secure']);
   }
 
   private initArticles(): void {
