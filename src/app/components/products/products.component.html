@@ -4,14 +4,42 @@
   </p>
 </ng-container>
 <ng-template #showProducts>
-  <div *ngFor="let product of productsList">
-    <p>
-      <strong>id</strong>: {{ product.id }}<br />
-      <strong>Title</strong>: {{ product.title }}<br />
-      <strong>Price</strong>: {{ product.price }}<br />
-      <strong>Quantity</strong>: {{ product.quantity }}<br />
-      <strong>Photo</strong>: {{ product.photo }}<br />
-      <button (click)="addToCart(product)">Add to Cart</button>
-    </p>
-  </div>
+
+  <section>
+    <div class="row">
+      <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let product of productsList; let i = index">
+        <div class="card" *ngIf="i % 3 === 0">
+          <div class="cover item-a" style="background-image: url('{{ product.photo }}');">
+            <h1>{{ product.title }}</h1>
+            <span class="price">${{ product.price }}</span>
+            <div class="card-back">
+              <a (click)="addToCart(product)">Add to cart</a>
+              <a href="#">View detail</a>
+            </div>
+          </div>
+        </div>
+        <div class="card" *ngIf="i % 3 === 1">
+          <div class="cover item-b" style="background-image: url('{{ product.photo }}');">
+            <h1>{{ product.title }}</h1>
+            <span class="price">${{ product.price }}</span>
+            <div class="card-back">
+              <a (click)="addToCart(product)">Add to cart</a>
+              <a href="#">View detail</a>
+            </div>
+          </div>
+        </div>
+        <div class="card" *ngIf="i % 3 === 2">
+          <div class="cover item-c" style="background-image: url('{{ product.photo }}');">
+            <h1>{{ product.title }}</h1>
+            <span class="price">${{ product.price }}</span>
+            <div class="card-back">
+              <a (click)="addToCart(product)">Add to cart</a>
+              <a href="#">View detail</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </ng-template>
