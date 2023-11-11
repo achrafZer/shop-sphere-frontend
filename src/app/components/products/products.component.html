@@ -17,7 +17,7 @@
             <span class="price">${{ product.price }}</span>
             <div class="card-back">
               <a
-                *ngIf="isUserConnected()"
+                *ngIf="isUserConnected() && user.role === role.Buyer"
                 [routerLink]="[]"
                 (click)="addToCart(product)"
                 >Add to cart</a
@@ -35,7 +35,7 @@
             <span class="price">${{ product.price }}</span>
             <div class="card-back">
               <a
-                *ngIf="isUserConnected()"
+                *ngIf="isUserConnected() && user.role === role.Buyer"
                 [routerLink]="[]"
                 (click)="addToCart(product)"
                 >Add to cart</a
@@ -53,7 +53,7 @@
             <span class="price">${{ product.price }}</span>
             <div class="card-back">
               <a
-                *ngIf="isUserConnected()"
+                *ngIf="isUserConnected() && user.role === role.Buyer"
                 [routerLink]="[]"
                 (click)="addToCart(product)"
                 >Add to cart</a

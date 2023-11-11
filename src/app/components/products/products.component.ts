@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductDTO } from 'src/api-client';
+import { ProductDTO, RoleEnum, UserConnectedDTO } from 'src/api-client';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -11,7 +11,9 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  productsList!: ProductDTO[];
+  productsList: ProductDTO[] = [];
+  user!: UserConnectedDTO;
+  role = RoleEnum;
 
   constructor(
     private productsService: ProductService,
@@ -22,6 +24,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initProductsList();
+    this.user = this.authService.getUser();
   }
 
   /* Init the products list by fetching products from the database */
@@ -31,7 +34,6 @@ export class ProductsComponent implements OnInit {
         this.productsList = data ? [...data] : [];
       },
       error: () => {
-        this.productsList = [];
         this.snackBarService.openSnackBar(
           'Could not fetch products from database'
         );

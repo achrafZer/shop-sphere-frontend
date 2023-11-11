@@ -27,4 +27,10 @@ export class AuthService {
   public isAuthenticatedUser(): boolean {
     return !!localStorage.getItem('auth-data');
   }
+
+  public getUser(): UserConnectedDTO {
+    return JSON.parse(
+      localStorage.getItem('auth-data') as string
+    ) as UserConnectedDTO;
+  }
 }
