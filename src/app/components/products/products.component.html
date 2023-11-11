@@ -1,4 +1,4 @@
-<ng-container *ngIf="!productsList; else showProducts">
+<ng-container *ngIf="!productsList.length; else showProducts">
   <p>No products available yet. <br />Please come back later</p>
 </ng-container>
 <ng-template #showProducts>
