@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BuyerDTO } from 'src/api-client';
 import { BuyerService } from 'src/app/services/buyer.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-signup-form',
@@ -15,6 +16,7 @@ export class SignupFormComponent {
   constructor(
     private formBuilder: FormBuilder,
     private buyerService: BuyerService,
+    private snackBarService: SnackBarService,
     private router: Router
   ) {
     this.signupFrom = this.formBuilder.group({
@@ -30,11 +32,13 @@ export class SignupFormComponent {
     if (this.signupFrom.valid) {
       this.buyerService
         .createBuyer(this.signupFrom.value as BuyerDTO)
-        .subscribe(
-          (next) => console.log(next),
-          (error) => console.log(error)
-        );
-      this.router.navigate(['/login']);
+        .subscribe({
+          next: () => {
+            this.snackBarService.openSnackBar('Account created successfully');
+            this.router.navigate(['/login']);
+          },
+          error: (error) => console.log(error),
+        });
     }
   }
 }

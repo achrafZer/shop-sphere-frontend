@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { OrderDTO } from 'src/api-client';
+import { BuyerDTO, IdOrder, OrderDTO } from 'src/api-client';
 import { CartService } from 'src/app/services/cart.service';
+import { FormatDateService } from 'src/app/services/format-date.service';
 import { OrderService } from 'src/app/services/order.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-payment-form',
@@ -18,6 +20,8 @@ export class PaymentFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private cartService: CartService,
     private orderService: OrderService,
+    private snackBarService: SnackBarService,
+    private formatDateService: FormatDateService,
     private router: Router
   ) {
     this.paymentForm = this.formBuilder.group({
@@ -31,24 +35,29 @@ export class PaymentFormComponent implements OnInit {
     this.amount = this.cartService.getTotalPrice();
   }
 
-  public onSubmit(): void {
-    const date = new Date();
-    const options = {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    } as Intl.DateTimeFormatOptions;
-    const formattedDate = date.toLocaleDateString('fr-FR', options);
+  public onCheckout(): void {
     const order = {
       articles: [
         ...this.cartService.getArticles().map((element) => element.product),
       ],
-      date: formattedDate,
+      date: this.formatDateService.formatDate('fr-FR'),
       isFinalized: true,
-      client: JSON.parse(localStorage.getItem('auth-data')!),
+      client: JSON.parse(
+        localStorage.getItem('auth-data') as string
+      ) as BuyerDTO,
     } as OrderDTO;
-    this.orderService.createOrder(order).subscribe((data) => console.log(data));
-    this.cartService.clearCart();
-    this.router.navigate(['/orders']);
+    this.orderService.createOrder(order).subscribe({
+      next: (idOrder: IdOrder) => {
+        this.cartService.clearCart();
+        this.router
+          .navigate(['/orders'])
+          .then(() =>
+            this.snackBarService.openSnackBar('Order passed with success')
+          );
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 }

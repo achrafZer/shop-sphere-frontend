@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrderDTO } from 'src/api-client';
 import { OrderService } from 'src/app/services/order.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-orders',
@@ -10,11 +10,10 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class OrdersComponent implements OnInit {
   ordersList!: OrderDTO[];
-  error!: string;
 
   constructor(
     private ordersService: OrderService,
-    private snackBar: MatSnackBar
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): void {
@@ -25,18 +24,14 @@ export class OrdersComponent implements OnInit {
   private initOrdersList(): void {
     this.ordersService.getOrders().subscribe({
       next: (data: OrderDTO[]) => {
-        this.ordersList = data ? (this.ordersList = [...data]) : [];
+        this.ordersList = data ? [...data] : [];
       },
-      error: (error) => {
-        this.error = error;
-        this.openSnackBar('Could not fetch orders from database');
+      error: () => {
+        this.ordersList = [];
+        this.snackBarService.openSnackBar(
+          'Could not fetch orders from database'
+        );
       },
-    });
-  }
-
-  private openSnackBar(message: string): void {
-    this.snackBar.open(message, 'close', {
-      duration: 3000,
     });
   }
 }

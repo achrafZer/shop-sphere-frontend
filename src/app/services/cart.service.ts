@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductDTO } from 'src/api-client';
 import { CartArticle } from '../models/cart-article';
 import { ProductService } from './product.service';
+import { SnackBarService } from './snack-bar.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   constructor(
-    private snackBar: MatSnackBar,
+    private snackBarService: SnackBarService,
     private productService: ProductService
   ) {}
 
   public addProduct(product: ProductDTO) {
     if (!product.quantity) {
-      this.openSnackBar('This product is not available');
+      this.snackBarService.openSnackBar('This product is not available');
       return;
     }
     let article = this.getArticles().find(
@@ -26,7 +26,7 @@ export class CartService {
     } else {
       this.addArticle({ product: { ...product }, qte: 1 } as CartArticle);
     }
-    this.openSnackBar('Product added successfully');
+    this.snackBarService.openSnackBar('Product added successfully');
   }
 
   public removeProduct(product: ProductDTO): void {
@@ -46,10 +46,14 @@ export class CartService {
   }
 
   public getTotalPrice() {
-    return this.getArticles().reduce(
-      (accumulator, article) =>
-        accumulator + article.qte * article.product.price,
-      0
+    return parseFloat(
+      this.getArticles()
+        .reduce(
+          (accumulator, article) =>
+            accumulator + article.qte * article.product.price,
+          0
+        )
+        .toFixed(2)
     );
   }
 
@@ -71,8 +75,11 @@ export class CartService {
     } else {
       clonedArticles.push(article);
     }
-    this.productService.updateProduct(article.product).subscribe();
-    localStorage.setItem('auth-cart', JSON.stringify([...clonedArticles]));
+    this.productService
+      .updateProduct(article.product)
+      .subscribe(() =>
+        localStorage.setItem('auth-cart', JSON.stringify([...clonedArticles]))
+      );
   }
 
   private removeArticle(article: CartArticle): void {
@@ -88,13 +95,10 @@ export class CartService {
       article.qte--;
       clonedArticles.splice(index, 1, article);
     }
-    this.productService.updateProduct(article.product).subscribe();
-    localStorage.setItem('auth-cart', JSON.stringify([...clonedArticles]));
-  }
-
-  private openSnackBar(message: string): void {
-    this.snackBar.open(message, 'close', {
-      duration: 3000,
-    });
+    this.productService
+      .updateProduct(article.product)
+      .subscribe(() =>
+        localStorage.setItem('auth-cart', JSON.stringify([...clonedArticles]))
+      );
   }
 }

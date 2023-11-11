@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { BuyerDTO } from 'src/api-client';
 import { BuyerService } from 'src/app/services/buyer.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-buyer-update-form',
@@ -16,7 +17,8 @@ export class BuyerUpdateFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private buyerService: BuyerService,
-    private snackBar: MatSnackBar
+    private snackBarService: SnackBarService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -24,6 +26,7 @@ export class BuyerUpdateFormComponent implements OnInit {
       firstName: [this.buyer.firstName, Validators.required],
       lastName: [this.buyer.lastName, Validators.required],
       address: [this.buyer.address, Validators.required],
+      password: ['', Validators.required],
     });
   }
 
@@ -34,15 +37,18 @@ export class BuyerUpdateFormComponent implements OnInit {
         id: this.buyer.id,
         email: this.buyer.email,
       } as BuyerDTO;
-
       this.buyerService.updateBuyer(updatedBuyer).subscribe({
-        next: () => console.log(updatedBuyer),
-        error: () => this.openSnackBar(),
+        next: () => {
+          this.snackBarService.openSnackBar(
+            'Your information is updated successfully'
+          );
+          this.router
+            .navigate(['/me'])
+            .then(() => this.buyerUpdateForm.get('password')?.setValue(''));
+        },
+        error: () =>
+          this.snackBarService.openSnackBar("Can't update information"),
       });
     }
-  }
-
-  private openSnackBar() {
-    this.snackBar.open("Can't update information", 'close', { duration: 3000 });
   }
 }
