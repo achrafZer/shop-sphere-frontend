@@ -1,7 +1,5 @@
-<ng-container *ngIf="errorMessage; else showProducts">
-  <p>
-    {{ errorMessage }}
-  </p>
+<ng-container *ngIf="!productsList; else showProducts">
+  <p>No products available yet. <br />Please come back later</p>
 </ng-container>
 <ng-template #showProducts>
   <section>

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductDTO } from 'src/api-client';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-products',
@@ -12,12 +12,11 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductsComponent implements OnInit {
   productsList!: ProductDTO[];
-  errorMessage!: string;
 
   constructor(
     private productsService: ProductService,
     private cartService: CartService,
-    private snackBar: MatSnackBar,
+    private snackBarService: SnackBarService,
     private authService: AuthService
   ) {}
 
@@ -29,11 +28,13 @@ export class ProductsComponent implements OnInit {
   private initProductsList(): void {
     this.productsService.getProducts().subscribe({
       next: (data: ProductDTO[]) => {
-        this.productsList = [...data];
+        this.productsList = data ? [...data] : [];
       },
       error: () => {
-        this.errorMessage = 'toto';
-        this.openSnackBar('Could not fetch products from database');
+        this.productsList = [];
+        this.snackBarService.openSnackBar(
+          'Could not fetch products from database'
+        );
       },
     });
   }
@@ -50,11 +51,5 @@ export class ProductsComponent implements OnInit {
         : p
     );
     this.productsList = [...updatedProductsList];
-  }
-
-  private openSnackBar(message: string): void {
-    this.snackBar.open(message, 'close', {
-      duration: 3000,
-    });
   }
 }
