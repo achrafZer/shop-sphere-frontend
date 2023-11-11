@@ -3,8 +3,16 @@
     <a href="#default" class="logo">Shop Sphere</a>
     <div class="header-right">
       <a [routerLink]="['/home']">Home</a>
-      <a [routerLink]="['/cart']" *ngIf="user !== null">My cart</a>
-      <a [routerLink]="['/orders']" *ngIf="user !== null">My orders</a>
+      <a
+        [routerLink]="['/cart']"
+        *ngIf="user !== null && user.role === role.Buyer"
+        >My cart</a
+      >
+      <a
+        [routerLink]="['/orders']"
+        *ngIf="user !== null && user.role === role.Buyer"
+        >My orders</a
+      >
       <a [routerLink]="['/login']" *ngIf="user === null">Log in</a>
       <a [routerLink]="['/signup']" *ngIf="user === null">Sign up</a>
       <a [routerLink]="['/me']" *ngIf="user !== null">Me</a>

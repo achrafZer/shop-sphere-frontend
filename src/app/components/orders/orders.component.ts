@@ -9,7 +9,7 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
   styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent implements OnInit {
-  ordersList!: OrderDTO[];
+  ordersList: OrderDTO[] = [];
 
   constructor(
     private ordersService: OrderService,
@@ -27,7 +27,6 @@ export class OrdersComponent implements OnInit {
         this.ordersList = data ? [...data] : [];
       },
       error: () => {
-        this.ordersList = [];
         this.snackBarService.openSnackBar(
           'Could not fetch orders from database'
         );

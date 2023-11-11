@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserConnectedDTO } from 'src/api-client';
+import { RoleEnum, UserConnectedDTO } from 'src/api-client';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -9,9 +9,10 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   user!: UserConnectedDTO;
+  role = RoleEnum;
 
   constructor(private authService: AuthService) {
-    this.user = JSON.parse(localStorage.getItem('auth-data')!);
+    this.user = this.authService.getUser();
   }
 
   public logout(): void {

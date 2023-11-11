@@ -1,0 +1,118 @@
+<section>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <span></span> <span></span> <span></span> <span></span> <span></span>
+  <div class="signin">
+    <div class="content">
+      <h2>Update My Information</h2>
+      <form [formGroup]="userUpdateForm" (ngSubmit)="onSubmit()" class="form">
+        <div class="inputBox">
+          <input
+            required
+            type="text"
+            id="firstName"
+            name="firstName"
+            formControlName="firstName"
+          />
+          <i>FirstName</i>
+        </div>
+
+        <div class="inputBox">
+          <input
+            required
+            type="text"
+            id="lastName"
+            name="lastName"
+            formControlName="lastName"
+          />
+          <i>LastName</i>
+        </div>
+        <div *ngIf="user.role === role.Admin" class="inputBox">
+          <input
+            required
+            type="email"
+            id="email"
+            name="email"
+            formControlName="email"
+          />
+          <i>Email</i>
+        </div>
+
+        <div *ngIf="user.role === role.Buyer" class="inputBox">
+          <input
+            required
+            type="text"
+            id="address"
+            name="address"
+            formControlName="address"
+          />
+          <i>Adress</i>
+        </div>
+
+        <div *ngIf="user.role === role.Buyer" class="inputBox">
+          <input
+            required
+            type="password"
+            id="password"
+            name="password"
+            formControlName="password"
+          />
+          <i>Password</i>
+        </div>
+
+        <div *ngIf="user.role === role.Buyer" class="inputBox">
+          <input type="submit" value="Update" />
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
