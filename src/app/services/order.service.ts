@@ -18,35 +18,11 @@ export class OrderService {
   }
 
   /**
-   * Delete an order in the database
-   * @param id of the order to delete
-   */
-  public deleteOrder(id: number): Observable<any> {
-    return this.ordersApiService.deleteOrder(id);
-  }
-
-  /**
-   * Find an order by id
-   * @param id the id of the order to find
-   * @returns an observable of order
-   */
-  public getOrder(id: number): Observable<OrderDTO> {
-    return this.ordersApiService.getOrder(id);
-  }
-
-  /**
-   * Retrieve all orders from the database
+   * Retrieve all orders from the database for a buyer
+   * @param buyerId the id of the buyer
    * @returns an observable of orders
    */
-  public getOrders(): Observable<OrderDTO[]> {
-    return this.ordersApiService.getOrders();
-  }
-
-  /**
-   * Update an order in the database
-   * @param order the order to update
-   */
-  public updateOrder(order: OrderDTO): Observable<any> {
-    return this.ordersApiService.updateOrder(order);
+  public getOrders(buyerId: number): Observable<OrderDTO[]> {
+    return this.ordersApiService.getOrders(buyerId);
   }
 }

@@ -13,7 +13,6 @@ import { LoginFormComponent } from './components/forms/login-form/login-form.com
 import { PaymentFormComponent } from './components/forms/payment-form/payment-form.component';
 import { SignupFormComponent } from './components/forms/signup-form/signup-form.component';
 import { UserUpdateFormComponent } from './components/forms/user-update-form/user-update-form.component';
-import { OrderComponent } from './components/order/order.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductsComponent } from './components/products/products.component';
@@ -23,7 +22,6 @@ import { UserComponent } from './components/user/user.component';
   declarations: [
     AppComponent,
     LoginFormComponent,
-    OrderComponent,
     OrdersComponent,
     ProductComponent,
     ProductsComponent,

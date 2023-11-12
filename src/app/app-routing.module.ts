@@ -4,7 +4,6 @@ import { CartComponent } from './components/cart/cart.component';
 import { LoginFormComponent } from './components/forms/login-form/login-form.component';
 import { PaymentFormComponent } from './components/forms/payment-form/payment-form.component';
 import { SignupFormComponent } from './components/forms/signup-form/signup-form.component';
-import { OrderComponent } from './components/order/order.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductsComponent } from './components/products/products.component';
@@ -25,11 +24,6 @@ const routes: Routes = [
   {
     path: 'orders',
     component: OrdersComponent,
-    canActivate: [canActivate, canActivateOnlyForBuyer],
-  },
-  {
-    path: 'orders/:id',
-    component: OrderComponent,
     canActivate: [canActivate, canActivateOnlyForBuyer],
   },
   {
