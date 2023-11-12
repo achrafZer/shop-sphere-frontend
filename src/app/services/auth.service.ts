@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginDTO, LoginService, UserConnectedDTO } from 'src/api-client';
+import { CartArticle } from '../models/cart-article';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private cartService: CartService
+  ) {}
 
   public login(email: string, password: string): void {
     this.loginService.login({ email, password } as LoginDTO).subscribe({
@@ -20,6 +26,16 @@ export class AuthService {
   }
 
   public logout(): void {
+    const cart = JSON.parse(
+      localStorage.getItem('auth-cart') as string
+    ) as CartArticle[];
+    if (cart.length > 0) {
+      cart.forEach((article) => {
+        for (let i = 1; i <= article.qte; i++) {
+          this.cartService.removeProduct(article.product);
+        }
+      });
+    }
     localStorage.clear();
     this.router.navigate(['/home']).then(() => window.location.reload());
   }

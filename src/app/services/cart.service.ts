@@ -42,7 +42,7 @@ export class CartService {
       const parseData = JSON.parse(data) as CartArticle[];
       return parseData;
     }
-    return [] as CartArticle[];
+    return [];
   }
 
   public getTotalPrice() {
@@ -75,11 +75,12 @@ export class CartService {
     } else {
       clonedArticles.push(article);
     }
-    this.productService
-      .updateProduct(article.product)
-      .subscribe(() =>
-        localStorage.setItem('auth-cart', JSON.stringify([...clonedArticles]))
-      );
+    this.productService.updateProduct(article.product).subscribe({
+      error: () => {
+        throw new Error("Can't add article");
+      },
+    });
+    localStorage.setItem('auth-cart', JSON.stringify([...clonedArticles]));
   }
 
   private removeArticle(article: CartArticle): void {
@@ -95,10 +96,11 @@ export class CartService {
       article.qte--;
       clonedArticles.splice(index, 1, article);
     }
-    this.productService
-      .updateProduct(article.product)
-      .subscribe(() =>
-        localStorage.setItem('auth-cart', JSON.stringify([...clonedArticles]))
-      );
+    this.productService.updateProduct(article.product).subscribe({
+      error: () => {
+        throw new Error("Can't remove article");
+      },
+    });
+    localStorage.setItem('auth-cart', JSON.stringify([...clonedArticles]));
   }
 }

@@ -17,7 +17,7 @@
       <span class="amex"></span>
       <span class="discover"></span>
     </div>
-    <form (ngSubmit)="onCheckout()">
+    <form [formGroup]="paymentForm" (ngSubmit)="onCheckout()">
       <div class="form-group">
         <label for="PaymentAmount">Payment amount</label>
         <div class="amount-placeholder">
@@ -26,36 +26,78 @@
         </div>
       </div>
       <div class="form-group">
-        <label or="NameOnCard">Name on card</label>
+        <label for="cardHolder">Name on card</label>
         <input
-          id="NameOnCard"
+          id="cardHolder"
+          name="cardHolder"
+          formControlName="cardHolder"
           class="form-control"
           type="text"
-          maxlength="255"
+          maxlength="25"
+          [ngClass]="{
+            'error-border':
+              paymentForm.get('cardHolder')?.invalid &&
+              (isFormSubmitted ||
+                paymentForm.get('cardHolder')?.dirty ||
+                paymentForm.get('cardHolder')?.touched)
+          }"
         />
       </div>
       <div class="form-group">
-        <label for="CreditCardNumber">Card number</label>
+        <label for="cardNumber">Card number</label>
         <input
-          id="CreditCardNumber"
+          id="cardNumber"
+          name="cardNumber"
+          formControlName="cardNumber"
           class="null card-image form-control"
           type="text"
+          maxlength="16"
+          [ngClass]="{
+            'error-border':
+              paymentForm.get('cardNumber')?.invalid &&
+              (isFormSubmitted ||
+                paymentForm.get('cardNumber')?.dirty ||
+                paymentForm.get('cardNumber')?.touched)
+          }"
         />
       </div>
       <div class="expiry-date-group form-group">
-        <label for="ExpiryDate">Expiry date</label>
+        <label for="expDate">Expiry date</label>
         <input
-          id="ExpiryDate"
+          id="expDate"
+          name="expDate"
+          formControlName="expDate"
           class="form-control"
           type="text"
-          placeholder="MM / YY"
-          maxlength="7"
+          placeholder="MM/YY"
+          maxlength="5"
+          [ngClass]="{
+            'error-border':
+              paymentForm.get('expDate')?.invalid &&
+              (isFormSubmitted ||
+                paymentForm.get('expDate')?.dirty ||
+                paymentForm.get('expDate')?.touched)
+          }"
         />
       </div>
       <div class="security-code-group form-group">
-        <label for="SecurityCode">Security code</label>
+        <label for="code">Security code</label>
         <div class="input-container">
-          <input id="SecurityCode" class="form-control" type="text" />
+          <input
+            id="code"
+            name="code"
+            formControlName="code"
+            class="form-control"
+            type="text"
+            maxlength="3"
+            [ngClass]="{
+              'error-border':
+                paymentForm.get('code')?.invalid &&
+                (isFormSubmitted ||
+                  paymentForm.get('code')?.dirty ||
+                  paymentForm.get('code')?.touched)
+            }"
+          />
           <i id="cvc" class="fa fa-question-circle"></i>
         </div>
         <div class="cvc-preview-container two-card hide">
@@ -75,5 +117,4 @@
     </form>
   </div>
 </div>
-
 <br /><br /><br />
