@@ -1,6 +1,6 @@
 <header>
   <div class="header">
-    <a href="#default" class="logo">Shop Sphere</a>
+    <a href="#default" class="logo"><img src="../assets/logo.png" alt="logo" style="max-height: 35px;"></a>
     <div class="header-right">
       <a [routerLink]="['/home']">Home</a>
       <a
@@ -15,7 +15,7 @@
       >
       <a [routerLink]="['/login']" *ngIf="user === null">Log in</a>
       <a [routerLink]="['/signup']" *ngIf="user === null">Sign up</a>
-      <a [routerLink]="['/me']" *ngIf="user !== null">Me</a>
+      <a [routerLink]="['/me']" *ngIf="user !== null">My Profile</a>
       <a [routerLink]="[]" *ngIf="user !== null" (click)="logout()">Log out</a>
     </div>
   </div>
@@ -30,9 +30,10 @@
         <div class="col-md-6 item text">
           <h3>Shop Sphere</h3>
           <p>
-            Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus
-            ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique
-            lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.
+            Shop Sphere is our watch purchasing platform. 
+            Come explore our models and place your orders 
+            on this 100% secure platform. Create your account 
+            and let yourself be captivated by our charming watches.
           </p>
         </div>
         <div class="col item social">
@@ -42,7 +43,7 @@
           ><a href="#"><i class="icon ion-social-instagram"></i></a>
         </div>
       </div>
-      <p class="copyright">Shop Sphere © 2018</p>
+      <p class="copyright">Shop Sphere © 2023</p>
     </div>
   </footer>
 </div>

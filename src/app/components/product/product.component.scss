@@ -80,8 +80,6 @@ strong {
 }
 
 
-
-
 // =========================
 // this wraps all items
 // =========================
@@ -89,7 +87,6 @@ strong {
   width:100%;
   height: 100%;
   max-height: 100%;
-  padding-top: 5%;
   overflow-x: hidden;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -98,8 +95,6 @@ strong {
   perspective: 150rem;
   perspective-origin: 50% 110%;
 }
-
-
 
 
 // =========================
@@ -112,12 +107,7 @@ strong {
   padding-bottom: 5%;
   transform-origin: 50% 100%;
   transform-style: preserve-3d;
-  //box-shadow: inset 0 0 0 1px red;
-  
-  @include wide-m { margin-bottom: 40%; }
 }
-
-
 
 
 // =========================
@@ -162,12 +152,8 @@ strong {
   
   // the front-side
   &:after {
-    bottom: -500px;
     left: 0;
-    height: 500px;
     background-image: linear-gradient($master-d-10, $master-l-10);
-    transform-origin: 50% 0;
-    transform: rotateX(-70deg);
     //box-shadow: inset 0 0 0 5px blue;
   }
 }
@@ -188,7 +174,6 @@ strong {
 // animations for the shadows
 @keyframes floating-shadow-l {
   0%, 100% { 
-    background-size: 35% 80%;
     background-position: 10% 80%; 
   }
   50% { 
@@ -293,7 +278,6 @@ strong {
   font-size: 87.5%;
   line-height: 1.333;
   margin-bottom: 1.25rem;
-  
 }
 
 .item-caption p a {
@@ -368,4 +352,50 @@ strong {
   line-height: 1.4286;
 }
 
+.button-59 {
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  color: #000;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #000;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: -.8px;
+  line-height: 24px;
+  min-width: 140px;
+  outline: 0;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
 
+.button-59:focus {
+  color: #171e29;
+}
+
+.button-59:hover {
+  border-color: #06f;
+  color: #06f;
+  fill: #06f;
+}
+
+.button-59:active {
+  border-color: #06f;
+  color: #06f;
+  fill: #06f;
+}
+
+@media (min-width: 768px) {
+  .button-59 {
+    min-width: 170px;
+  }
+}
