@@ -65,7 +65,6 @@ export class UserUpdateFormComponent implements OnInit {
         id: this.user.id,
         email: this.user.email,
       } as BuyerDTO;
-      console.log(updatedUser);
       this.buyerService.updateBuyer(updatedUser).subscribe({
         next: () => {
           this.snackBarService.openSnackBar(

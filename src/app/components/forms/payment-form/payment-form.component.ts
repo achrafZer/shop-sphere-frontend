@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BuyerDTO, IdOrder, OrderDTO } from 'src/api-client';
+import { AuthService } from 'src/app/services/auth.service';
 import { CardService } from 'src/app/services/card.service';
 import { CartService } from 'src/app/services/cart.service';
 import { FormatDateService } from 'src/app/services/format-date.service';
@@ -27,6 +28,7 @@ export class PaymentFormComponent implements OnInit {
     private snackBarService: SnackBarService,
     private formatDateService: FormatDateService,
     private cardService: CardService,
+    private authService: AuthService,
     private location: Location,
     private router: Router
   ) {
@@ -70,9 +72,7 @@ export class PaymentFormComponent implements OnInit {
       ],
       date: this.formatDateService.formatDate('fr-FR'),
       isFinalized: true,
-      client: JSON.parse(
-        localStorage.getItem('auth-data') as string
-      ) as BuyerDTO,
+      client: this.authService.getUser() as BuyerDTO,
     } as OrderDTO;
     this.orderService.createOrder(order).subscribe({
       next: (idOrder: IdOrder) => {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderDTO } from 'src/api-client';
+import { AuthService } from 'src/app/services/auth.service';
 import { OrderService } from 'src/app/services/order.service';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 
@@ -13,7 +14,8 @@ export class OrdersComponent implements OnInit {
 
   constructor(
     private ordersService: OrderService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -22,7 +24,8 @@ export class OrdersComponent implements OnInit {
 
   /* Init the orders list by fetching orders from the database */
   private initOrdersList(): void {
-    this.ordersService.getOrders().subscribe({
+    const id = this.authService.getUser().id;
+    this.ordersService.getOrders(id as number).subscribe({
       next: (data: OrderDTO[]) => {
         this.ordersList = data ? [...data] : [];
       },
