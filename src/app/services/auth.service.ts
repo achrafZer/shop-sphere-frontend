@@ -45,7 +45,11 @@ export class AuthService {
       });
     }
     localStorage.clear();
-    this.router.navigate(['/home']).then(() => window.location.reload());
+    setTimeout(
+      () =>
+        this.router.navigate(['/home']).then(() => window.location.reload()),
+      1000
+    );
   }
 
   public isAuthenticatedUser(): boolean {
