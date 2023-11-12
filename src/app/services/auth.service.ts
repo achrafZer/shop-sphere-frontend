@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginDTO, LoginService, UserConnectedDTO } from 'src/api-client';
 import { CartArticle } from '../models/cart-article';
 import { CartService } from './cart.service';
+import { SnackBarService } from './snack-bar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,8 @@ export class AuthService {
   constructor(
     private loginService: LoginService,
     private router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    private snackBarService: SnackBarService
   ) {}
 
   public login(email: string, password: string): void {
@@ -21,7 +23,13 @@ export class AuthService {
         localStorage.setItem('auth-cart', JSON.stringify([]));
         this.router.navigate(['/home']).then(() => window.location.reload());
       },
-      error: (error) => console.log(error),
+      error: () => {
+        this.router
+          .navigate(['/login'])
+          .then(() =>
+            this.snackBarService.openSnackBar('Invalid email or password')
+          );
+      },
     });
   }
 
