@@ -1,6 +1,9 @@
 <ng-container *ngIf="!productsList.length; else showProducts">
-  <p>No products available yet. <br />Please come back later</p>
+  <div class="center-content">
+    <p>No products available yet. <br/>The backend is loading... Please be patient, this may take a moment.</p>
+  </div>  
 </ng-container>
+
 <ng-template #showProducts>
   <section>
     <div class="row">
