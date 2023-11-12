@@ -37,6 +37,9 @@ export class CartComponent implements OnInit {
   }
 
   private initArticles(): void {
-    this.articles = [...structuredClone(this.cartService.getArticles())];
+    const updatedArticles = this.cartService
+      .getArticles()
+      .map((p) => structuredClone(p) as CartArticle);
+    this.articles = [...updatedArticles];
   }
 }
